@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)https://testdevelocidad.telecable.es/ -->
+<html><div id="bm-2225254214"><div data-reactroot="" id="bm-2225254214"></div></div><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+			
+		<meta name="keywords" content="Velocidad, internet, medir, test de velocidad, conexion, cable, testear, saber velocidad, probar, router, wireless, subida, bajada, testdevelocidad, test">
+		<meta name="description" content="Mide la velocidad de tu conexion a Internet de Telecable.">
+                <title>TestDeVelocidad</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale:1.0 maximum-scale:1.0">
+        	<link rel="shortcut icon" type="image/png" href="https://testdevelocidad.telecable.es/favicon.png">
+		<script src="./TestDeVelocidad_files/jquery-1.10.2.js.descarga"></script>
+	</head>
+        <body style="padding: 0px; margin: 0px; height: 100%; width: 100%;">
+                        <!--<iframe width="100%" height="520px" frameborder="0" src="http://telecable.speedtestcustom.com"></iframe>-->
+                        <!--<iframe style="width: 100%; height: 600px;" frameborder="0" src="http://telecable.speedtestcustom.com"></iframe>-->
+			<iframe frameborder="0" style="min-height: 650px;" height="max-content" width="100%" src="./TestDeVelocidad_files/saved_resource.html"></iframe>
+			<div id="speed" style="visibility: hidden; display: none;"><img src="./TestDeVelocidad_files/html5.php" width="1" height="1"><img src="./TestDeVelocidad_files/html5(1).php" width="1" height="1"></div>
+		<script>
+
+			// Cross-browser event handler
+			function attachToWindow (listener){
+			   // Non IE
+			   if (window.addEventListener) {
+			     window.addEventListener("message", listener);
+			   // IE
+			   } else if (window.attachEvent) {
+			     window.attachEvent("onmessage", listener);
+			   }
+			 }
+
+			 function testCompleted (event){
+			   // Only allow messages from the correct speedtest custom url to prevent XSS attacks.
+			   // https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
+			   // REPLACE THE URL BELOW WITH YOUR SPECIFIC SPEEDTEST CUSTOM TEST URL
+			   if (event.origin !== 'https://telecable.speedtestcustom.com') {
+			     return;
+			   }
+	
+			   // event.data is the resultData object
+			   // REMOVE THIS LINE AND ADD YOUR DATA CONSUMER HERE
+			   //console.log(event.data);
+			   //console.log("RECUPERAR VALORES DEVUELTOS POR SPEED");
+			   var _download=event.data.download;
+			   var _upload=event.data.upload;
+			   var _units=event.data.units;
+			   var _latency=event.data.latency.jitter;
+			   var _latencyMinimum=event.data.latency.minimum;
+			   var _host=event.data.config.host;
+			   var _port=event.data.config.port;
+                           var _serverId=event.data.config.serverId;
+                           var _serverVersion=event.data.config.serverVersion;
+                           var _testId=event.data.config.testId;
+                           var _startTimestamp=event.data.start.timestamp;
+                           var _endTimestamp=event.data.end.timestamp;
+                           var _platform=event.data.device.platform;
+
+			// Enviamos al desarrollo que almacena los resultados en nuestra red.
+			$('#speed').prepend('<img src="http://st1.telecable.com/report/html5.php?download=' + _download + '&upload=' + _upload + '&units=' + _units + '&latency=' + _latency + '&latencyMinimum=' + _latencyMinimum + '&host=' + _host + '&port=' + _port + '&serverId=' + _serverId + '&serverVersion=' + _serverVersion + '&testId=' + _testId + '&startTimestamp=' + _startTimestamp + '&endTimestamp=' + _endTimestamp + '&platform=' + _platform + '" width=1 height=1>')
+				   .css('display', 'none');
+
+
+			}
+
+			attachToWindow(testCompleted);
+
+		</script>
+        
+
+</body></html>
